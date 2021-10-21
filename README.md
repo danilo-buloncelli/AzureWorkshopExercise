@@ -1,18 +1,35 @@
-# CmpAzureDemo
-[![topmovers-dev](https://github.com/comparis/topmovers-azure/actions/workflows/develop_topmovers-dev.yml/badge.svg?branch=develop)](https://github.com/comparis/topmovers-azure/actions/workflows/develop_topmovers-dev.yml)
-[![topmovers-ratings-dev](https://github.com/comparis/topmovers-azure/actions/workflows/develop_topmovers-ratings-dev.yml/badge.svg?branch=develop)](https://github.com/comparis/topmovers-azure/actions/workflows/develop_topmovers-ratings-dev.yml)
+# AzureWorkshopExercise
+Scaffolded  .NET 4.8 MVC application used for Azure Workshop exercise.
 
-## Setup database
+## Setup	
+1. Clone this repository and open it using VS2017
+2. Create and checkout a feature branch with your name, for example: `develop-IR` 
+3. Push your branch to remote (you will need it later)
 
-Two options: 
-- Restore topmovers_local database on your local machine. You can find a copy of it here: S:\ivan.radovic\sqlbackup and use `topmovers_local.bak`
-- Change connection string in Web.config to point to Azure dev database. You can find dev connection string in the Web.Dev.config file or you can go to Azure portal and get connection string from `comparis-mkp-dev001` database.
+## Publish and deploy web app
+1. Right click on the project `AzureWorkshopExercise`
+2. Click publish and in the newly opened menu select App Service
+3. Select Create New one and then (Create profile)
+4. In the newly opened window we will create app service, app plan and resource group:
+    - App name: enter your App service name, for example: `AzureWorkshopExercise-dev`
+    - Subscription: select Visual Studio Professional subscription
+    - Resource group: click on New and then enter something like: `AzureWorkshopExercise-RSG-Dev`
+    - Hosting plan: click on New and then enter something like: `AzureWorkshopExercise-ASP-Dev`
+    - Leave Applications insights to none and click create
+    - Verify that your web app is deployed and published by opening the website URL. 
+    - Optional: Navigate to your Azure portal and examine what you created via VS
 
-### Azure App url
-- Topmovers dev: https://topmovers-dev.azurewebsites.net/
-- Topmovers dev test (temp): https://topmovers-dev-test.azurewebsites.net/
-- Topmovers ratings dev: https://topmovers-ratings-dev.azurewebsites.net/
 
-## Requirements
-- .NET Framework 4.8
-- Entity Framework 6.4.4
+## CI/CD
+1. To setup CI/CD go to your resrouce group, open your app service resource
+2. On the left sidebar menu open Azure deployment center
+3. In the newly opened view, add the following parameters:
+    - Source: `Github`
+    - Organisation: `Comparis`
+    - Repository: `AzureWorkshopExercise`
+    - Branch: `develop-{YourBranchSufix}`
+    - Workflow option: select the option to create workflow
+    - Click save in the right upper corner
+4. Step 2. should have created and committed Github Actions workflow for you
+5. To verify that your automatic pipeline works, go to repository merge `update-hero-section` and push to remote repository
+6. Verify and observe the progress [TODO]
